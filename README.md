@@ -6,20 +6,31 @@
 
 Analisis Eksperimen DOM-Based Cross-Site Scripting (XSS)
 
+Analisis Eksperimen DOM-Based
+Cross-Site Scripting (XSS)
 Pendahuluan
-Keamanan aplikasi web merupakan aspek yang sangat penting dalam pengembangan sistem modern, terutama karena meningkatnya ancaman serangan siber. Salah satu jenis kerentanan yang sering ditemukan adalah Cross-Site Scripting (XSS), yaitu serangan yang memungkinkan penyerang menyisipkan kode berbahaya ke dalam halaman web. Pada eksperimen ini, dilakukan pengujian sederhana untuk memahami bagaimana XSS dapat terjadi melalui manipulasi Document Object Model (DOM) menggunakan JavaScript.
-
+Keamanan aplikasi web merupakan aspek penting dalam pengembangan sistem modern. Salah
+satu kerentanan yang sering terjadi adalah Cross-Site Scripting (XSS). Pada eksperimen ini,
+dilakukan pengujian sederhana untuk memahami bagaimana XSS dapat terjadi pada manipulasi
+DOM menggunakan JavaScript.
 Kode Program
-Eksperimen ini menggunakan kode HTML sederhana yang menerima input dari pengguna dan menampilkannya kembali di halaman web menggunakan JavaScript. Input tersebut diproses tanpa validasi atau penyaringan khusus, sehingga memungkinkan terjadinya eksekusi script berbahaya jika dimasukkan oleh pengguna.
-
+Berikut kode HTML yang digunakan dalam eksperimen:
 Langkah Pengujian
-Langkah pertama adalah menjalankan file HTML di browser. Selanjutnya, pengguna diminta memasukkan input normal, seperti nama, untuk melihat bagaimana sistem bekerja dalam kondisi aman. Setelah itu, dilakukan pengujian dengan memasukkan script berbahaya, seperti alert('XSS'), lalu menekan tombol kirim. Hasil dari kedua jenis input tersebut kemudian diamati untuk melihat perbedaannya.
-
+1. Jalankan file HTML di browser
+2. Masukkan input normal (contoh: Novellysna Nurziska)
+3. Amati hasil output
+4. Masukkan script XSS: <script>alert('XSS')</script>
+5. Klik tombol kirim dan amati hasil
 Hasil Pengujian
-Pada input normal, sistem menampilkan teks sesuai dengan yang dimasukkan pengguna tanpa masalah. Namun, ketika script XSS dimasukkan, browser mengeksekusi kode tersebut dan menampilkan alert, yang menunjukkan bahwa aplikasi rentan terhadap serangan XSS. Hal ini terjadi karena penggunaan innerHTML yang langsung memproses input sebagai HTML.
-
+Tambahkan screenshot berikut:
+[Screenshot 1: Tampilan awal form]
+[Screenshot 2: Hasil input normal]
+[Screenshot 3: Alert XSS muncul]
 Perbaikan
-Untuk mengatasi masalah tersebut, dilakukan perubahan pada kode dengan mengganti innerHTML menjadi innerText. Dengan cara ini, input dari pengguna akan diperlakukan sebagai teks biasa, bukan sebagai kode HTML atau JavaScript, sehingga mencegah eksekusi script berbahaya.
-
+Ubah innerHTML menjadi innerText:
+document.getElementById("output").innerText = "Halo, " + nama;
+Tambahkan screenshot setelah perbaikan:
+[Screenshot 4: Tidak ada alert setelah perbaikan]
 Kesimpulan
-Eksperimen ini menunjukkan bahwa penggunaan innerHTML tanpa validasi dapat menyebabkan kerentanan XSS. Dengan menerapkan metode yang lebih aman seperti innerText, risiko serangan dapat diminimalkan dan keamanan aplikasi web dapat ditingkatkan.
+XSS dapat terjadi akibat penggunaan innerHTML tanpa validasi. Dengan mengganti ke
+innerText, eksekusi script dapat dicegah.
